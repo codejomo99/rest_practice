@@ -28,8 +28,8 @@ public class BlogApiController {
         .body(savedArticle);
   }
 
-  @GetMapping("/api/article")
-  public ResponseEntity<List<ArticleResponse>> findAllArticle(@RequestParam Long id){
+  @GetMapping("/api/articles")
+  public ResponseEntity<List<ArticleResponse>> findAllArticle(){
     List<ArticleResponse> articles = blogService.findAll()
         .stream()
         .map(ArticleResponse::new)
