@@ -69,7 +69,7 @@ public class BlogApiController {
   public ResponseEntity<Void> deleteById(@PathVariable("id") Long id){
     blogService.delete(id);
 
-    return ResponseEntity.ok(null);
+    return ResponseEntity.ok().build();
   }
 
 }

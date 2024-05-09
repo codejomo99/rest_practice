@@ -1,8 +1,8 @@
 package com.elice.jongmin.controller;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
 import com.elice.jongmin.domain.Article;
 import com.elice.jongmin.dto.ArticleRequest;
 import com.elice.jongmin.dto.UpdateArticleRequest;
@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -160,6 +161,30 @@ class BlogApiControllerTest {
     assertThat(article.getContent()).isEqualTo(newContent);
   }
 
+  @DisplayName("Article 삭제 성공")
+  @Test
+  public void deleteArticle() throws Exception {
+    //given
+    final String url = "/api/article/{id}";
+    final String title = "Test Title";
+    final String content = "Test Content";
 
+    final Article saveArticle = Article.builder()
+        .title(title)
+        .content(content)
+        .build();
+
+    //when
+    ResultActions result = mockMvc.perform(delete(url, saveArticle.getId()));
+
+    //then
+    List<Article> articles = blogRepository.findAll();
+
+    assertThat(articles).isEmpty();
+
+
+
+
+  }
 
 }
