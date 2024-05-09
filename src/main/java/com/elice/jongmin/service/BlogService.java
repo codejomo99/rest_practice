@@ -4,6 +4,7 @@ import com.elice.jongmin.domain.Article;
 import com.elice.jongmin.dto.ArticleRequest;
 import com.elice.jongmin.dto.UpdateArticleRequest;
 import com.elice.jongmin.repository.BlogRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class BlogService {
   }
 
   // Update
+  @Transactional
   public Article update(Long id, UpdateArticleRequest request){
     Article article = blogRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("not found : " + id));
     article.update(request.getTitle(), request.getContent());
