@@ -3,15 +3,21 @@ spring:
     name: jongmin
 
   jpa:
-    # ?? ?? ??
     show-sql: true
     properties:
       hibernate:
         format_sql: true
 
-    # ??? ?? ? data.sql ??
+    # 데이터 초기화를 연기합니다.
     defer-datasource-initialization: true
 
-    datasource:
-      url: jdbc:h2:mem:testdb
-      username: sa
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password # 비밀번호 추가 (기본값이 아닌 경우)
+    driver-class-name: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console # H2 콘솔 경로 설정
